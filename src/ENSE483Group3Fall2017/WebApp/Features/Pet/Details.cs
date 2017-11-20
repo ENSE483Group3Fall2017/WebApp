@@ -19,9 +19,9 @@ namespace WebApp.Features.Pet
         {
             public string BeaconId { get; set; }
 
-            public string PetName { get; set; }
+            public string Name { get; set; }
 
-            public string PetKind { get; set; }
+            public string Kind { get; set; }
 
             public string Status { get; set; }
         }

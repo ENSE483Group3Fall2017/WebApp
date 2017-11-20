@@ -8,9 +8,16 @@ namespace WebApp.Features.Tracking
 {
     public class TrackingController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index(string id)
         {
             return View();
         }
+        
+        public ActionResult Details(Guid id)
+        {
+            return View();
+        }
+
+
     }
 }
