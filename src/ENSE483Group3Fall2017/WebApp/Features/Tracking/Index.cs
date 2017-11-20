@@ -26,15 +26,15 @@ namespace WebApp.Features.Tracking
 
         public class Model
         {
-            public DateTime FrameStart { get; set; }
+            public DateTime FrameStartTime { get; set; }
 
-            public DateTime FrameEnd { get; set; }
+            public DateTime FrameEndTime { get; set; }
 
-            public int MaxProximity { get; set; }
+            public int MaxProximityInFrame { get; set; }
 
-            public int MinProximity { get; set; }
+            public int MinProximityInFrame { get; set; }
 
-            public string Location { get; set; }
+            public string GeoReversedAddress { get; set; }
 
             public string GpsCoordinates { get; set; }
         }

@@ -3,7 +3,6 @@ using Ploeh.AutoFixture;
 using SemanticComparison.Fluent;
 using WebApp.Features.Pet;
 using Xunit;
-using MappingProfile = WebApp.Features.Pet.MappingProfile;
 
 namespace WebApp.Tests.Features.Pet.MapperTests
 {
@@ -17,7 +16,7 @@ namespace WebApp.Tests.Features.Pet.MapperTests
         }
     }
 
-    public class WhenMappingACreateCommandToAPetInstance
+    public class WhenMappingFromACreateCommandToAPet
     {
         [Theory, AutoFakeItEasyData(typeof(Customization))]
         public void ItShouldMapTheExpectedValues(Create.Command command, IMapper sut)
@@ -37,7 +36,7 @@ namespace WebApp.Tests.Features.Pet.MapperTests
         }
     }
 
-    public class WhenMappingAPetInstanceToIndexModel
+    public class WhenMappingFromAPetToIndexModel
     {
         [Theory, AutoFakeItEasyData(typeof(Customization))]
         public void ItShhouldMapTheExpectedValues(DAL.Pet pet, IMapper sut)
@@ -57,7 +56,7 @@ namespace WebApp.Tests.Features.Pet.MapperTests
         }
     }
 
-    public class WhenMappinggAPetInstanceToADetailModel
+    public class WhenMappingFromAPetToADetailModel
     {
         [Theory, AutoFakeItEasyData(typeof(Customization))]
         public void ItShouldMapTheExpectedValues(DAL.Pet pet, IMapper sut)

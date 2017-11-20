@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Tracking\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WebApp\WebApp.csproj" />
   </ItemGroup>
 
