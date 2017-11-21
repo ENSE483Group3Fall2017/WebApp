@@ -43,13 +43,13 @@ namespace WebApp.Tests.Features.Pet.MapperTests
         {
             // Arrange
             var likeness = pet.AsSource()
-                                .OfLikeness<Index.Model>()
+                                .OfLikeness<Details.Model>()
                                 .With(x => x.Kind).EqualsWhen((s, d) => s.Kind.ToString() == d.Kind)
                                 .With(x => x.Status).EqualsWhen((s, d) => s.Status.ToString() == d.Status);
 
 
             // Act
-            var result = sut.Map<DAL.Pet, Index.Model>(pet);
+            var result = sut.Map<DAL.Pet, Details.Model>(pet);
 
             // Assert
             likeness.ShouldEqual(result); 

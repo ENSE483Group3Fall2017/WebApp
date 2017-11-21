@@ -1,23 +1,38 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using System.Threading.Tasks;
+using WebApp.Infrastructure;
 
 namespace WebApp.Features.Pet
 {
     public class PetController : Controller
     {
-        // GET: Pet
-        public ActionResult Index()
+        private readonly IMediator _mediator;
+
+        public PetController(IMediator mediator)
         {
-            return View();
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
+        // GET: Pets
+        public async Task<ActionResult> Index()
+        {
+            var query = new Index.Query();
+            var items = await _mediator.Send(query);
+
+            return View(items);
         }
 
         // GET: Pet/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(Details.Query query)
         {
-            return View();
+            var option = await _mediator.Send(query);
+
+            return option.Match(some => View(some), () => HttpStatusCode.NotFound.Result());
         }
 
-        // GET: Pet/Create
         public ActionResult Create()
         {
             return View();
@@ -26,64 +41,21 @@ namespace WebApp.Features.Pet
         // POST: Pet/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Create.Command command)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            await _mediator.Send(command);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Pet/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Pet/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Pet/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return RedirectToAction(nameof(Details), new { id = command.Beacon.ToString() });
         }
 
         // POST: Pet/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Delete.Command command)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            await _mediator.Send(command);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

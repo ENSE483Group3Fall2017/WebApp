@@ -1,21 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Threading.Tasks;
 using WebApp.DAL;
-using JetBrains.Annotations;
 
 namespace WebApp.Infrastructure
 {
     public class PetTrackingContext : DbContext, IDbContext
     {
-        public PetTrackingContext(DbContextOptions<PetTrackingContext> options) : base(options)
+        public PetTrackingContext(DbContextOptions<PetTrackingContext> options) 
+            : base(options)
         {
         }
 
         public DbSet<Pet> Pets { get; set; }
 
         public DbSet<TrackingInfo> TrackingInfos { get; set; }
+
+        public Task<IDbContextTransaction> BeginTransactionAsync() => Database.BeginTransactionAsync();
+
+        public void CommitTransactionAsync() => Database.CommitTransaction();
+
+        public void RollbackTransaction() => Database.RollbackTransaction();
+
+        public Task SaveChangesAsync() => base.SaveChangesAsync();
     }
 }

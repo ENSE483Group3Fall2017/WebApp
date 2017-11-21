@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.DAL
 {
     public class TrackingInfo
     {
+        [Key]
         public Guid ID { get; set; }
 
         public Guid BatchID { get; set; }

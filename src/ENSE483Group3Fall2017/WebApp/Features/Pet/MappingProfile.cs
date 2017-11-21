@@ -11,7 +11,7 @@ namespace WebApp.Features.Pet
                 .ForMember(dst => dst.BeaconID, opt => opt.MapFrom(src => src.Beacon.ToString()))
                 .ForMember(dst => dst.Status, opt => opt.UseValue(PetStatus.Owned));
 
-            CreateMap<DAL.Pet, Pet.Index.Model>();
+            CreateMap<DAL.Pet, Pet.Details.Model>();
 
 
             CreateMap<DAL.Pet, Pet.Details.Model>();
