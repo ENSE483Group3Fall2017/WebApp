@@ -57,5 +57,14 @@ namespace WebApp.Features.Pet
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ToogleStatus(ToggleStatus.Command command)
+        {
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Details), new { id = command.BeaconId });
+        }
     }
 }

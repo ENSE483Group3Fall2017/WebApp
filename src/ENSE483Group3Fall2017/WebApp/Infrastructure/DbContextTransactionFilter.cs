@@ -17,7 +17,6 @@ namespace WebApp.Infrastructure
         {
             using (var transaction = await _dbContext.BeginTransactionAsync())
             {
-
                 await next();
 
                 await _dbContext.SaveChangesAsync();

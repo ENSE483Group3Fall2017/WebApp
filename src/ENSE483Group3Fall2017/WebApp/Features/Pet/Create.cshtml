@@ -3,11 +3,11 @@
 @model Create.Command
 
 @{ 
-    ViewData["Title"] = "Register Pet";
+    ViewData["Title"] = "Register a Pet";
 }
 
 <div class="container">
-    <h3>@ViewData["Title"]</h3>
+    <h2>@ViewData["Title"]</h2>
     <div class="row">
         <div class="col-md-6">
             <form asp-action="Create" method="post" asp-antiforgery="true">
@@ -40,6 +40,7 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-controller="Pet" asp-action="Index" class="btn btn-default">Cancel</a>
             </form>
         </div>
     </div>

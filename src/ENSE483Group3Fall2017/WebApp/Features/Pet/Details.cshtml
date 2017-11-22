@@ -1,5 +1,50 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using WebApp.Features.Pet
+
+@model Details.Model
+
+
 @{
+    ViewData["Title"] = $"{Model.Name} the {Model.Kind}";
 }
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="ToogleStatus" method="post" asp-antiforgery="true">
+                <div class="form-group">
+                    <label asp-for="BeaconId"></label>
+                    <p class="lead">@Model.BeaconId</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status"></label>
+                    <p class="lead">@Model.Status</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <p class="lead">
+                        @if(!string.IsNullOrWhiteSpace(Model.Description))
+                        {
+                            @Model.Description
+                        }
+                        else
+                        {
+                            <em class="text-muted">Please describe @Model.Name's outlook.</em>
+                        }
+                    </p>
+                </div>
+                @if (Model.IsLost)
+                {
+                    <button type="submit" class="btn btn-success">@Model.Name found <span class="glyphicon glyphicon-check"></span></button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-danger">@Model.Name got lost <span class="glyphicon glyphicon-alert"></span></button>
+
+                }
+                <a asp-controller="Pet" asp-action="Index" class="btn btn-primary">Pets</a>
+                <input type="hidden" asp-for="BeaconId" />
+            </form>
+        </div>
+    </div>
+</div>

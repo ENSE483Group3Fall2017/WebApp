@@ -24,8 +24,11 @@ namespace WebApp.Features.Pet
             public string Kind { get; set; }
 
             public string Status { get; set; }
-        }
+
             public string Description { get; set; }
+
+            public bool IsLost { get; set; }
+        }
 
         public class QueryHandler : IAsyncRequestHandler<Query, Option<Model>>
         {

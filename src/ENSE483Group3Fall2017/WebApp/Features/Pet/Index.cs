@@ -26,7 +26,7 @@ namespace WebApp.Features.Pet
             public string Status { get; set; }
         }
 
-        public class QueryHandler :  IAsyncRequestHandler<Query, IEnumerable<Model>>
+        public class QueryHandler : IAsyncRequestHandler<Query, IEnumerable<Model>>
         {
             private readonly IDbContext _dbContext;
             private readonly IMapper _mapper;
@@ -42,7 +42,7 @@ namespace WebApp.Features.Pet
                 var pets = await _dbContext.Pets
                                             .AsNoTracking()
                                             .ToArrayAsync();
-                if (pets.Any())
+                if (!pets.Any())
                     return Enumerable.Empty<Model>();
 
                 return pets.Select(x => _mapper.Map<DAL.Pet, Model>(x)).ToArray();
