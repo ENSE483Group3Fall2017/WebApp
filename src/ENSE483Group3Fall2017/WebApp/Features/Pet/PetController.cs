@@ -60,7 +60,7 @@ namespace WebApp.Features.Pet
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ToogleStatus(ToggleStatus.Command command)
+        public async Task<ActionResult> ToggleStatus(ToggleStatus.Command command)
         {
             await _mediator.Send(command);
 
