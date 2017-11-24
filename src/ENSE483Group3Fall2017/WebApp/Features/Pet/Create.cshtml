@@ -1,0 +1,47 @@
+﻿@using WebApp.Features.Pet
+
+@model Create.Command
+
+@{ 
+    ViewData["Title"] = "Register a Pet";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post" asp-antiforgery="true">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Kind"></label>
+                    <select asp-for="Kind" asp-items="Html.GetEnumSelectList<PetKind>()" class="form-control">
+                        <option value="">Please Select</option>
+                    </select>
+                    <span asp-validation-for="Kind" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Beacon.Minor"></label>
+                    <input asp-for="Beacon.Minor" class="form-control" />
+                    <span asp-validation-for="Beacon.Minor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Beacon.Major"></label>
+                    <input asp-for="Beacon.Major" class="form-control" />
+                    <span asp-validation-for="Beacon.Major" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="2" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-controller="Pet" asp-action="Index" class="btn btn-default">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

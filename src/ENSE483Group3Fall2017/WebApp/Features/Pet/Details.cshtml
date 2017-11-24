@@ -1,0 +1,50 @@
+﻿@using WebApp.Features.Pet
+
+@model Details.Model
+
+
+@{
+    ViewData["Title"] = $"{Model.Name} the {Model.Kind}";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" asp-antiforgery="true">
+                <input type="hidden" asp-for="BeaconId" />
+                <div class="form-group">
+                    <label asp-for="BeaconId"></label>
+                    <p class="lead">@Model.BeaconId</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status"></label>
+                    <p class="lead">@Model.Status</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <p class="lead">
+                        @if(!string.IsNullOrWhiteSpace(Model.Description))
+                        {
+                            @Model.Description
+                        }
+                        else
+                        {
+                            <em class="text-muted">Please describe @Model.Name's outlook.</em>
+                        }
+                    </p>
+                </div>
+                @if (Model.IsLost)
+                {
+                    <button asp-controller="Pet" asp-action="ToggleStatus" class="btn btn-success">@Model.Name found <span class="glyphicon glyphicon-check"></span></button>
+                }
+                else
+                {
+                    <button asp-controller="Pet" asp-action="ToggleStatus" class="btn btn-warning">@Model.Name got lost <span class="glyphicon glyphicon-alert"></span></button>
+                }
+                <a asp-controller="Pet" asp-action="Index" class="btn btn-primary">Pets</a>
+                <button asp-controller="Pet" asp-action="Delete" class="btn btn-danger pull-right">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>

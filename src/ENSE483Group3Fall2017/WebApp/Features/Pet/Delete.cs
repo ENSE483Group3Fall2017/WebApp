@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using WebApp.DAL;
+using WebApp.Service;
 
 namespace WebApp.Features.Pet
 {
@@ -39,16 +40,19 @@ namespace WebApp.Features.Pet
         public class CommandHandler : IAsyncRequestHandler<Command>
         {
             private readonly IDbContext _dbContext;
+            private readonly ILostPetsRegistry _registryService;
 
-            public CommandHandler(IDbContext dbContext)
+            public CommandHandler(IDbContext dbContext, ILostPetsRegistry registryService)
             {
                 _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+                _registryService = registryService ?? throw new ArgumentNullException(nameof(dbContext));
             }
 
             public async Task Handle(Command message)
             {
                 var pet = await _dbContext.Pets.FindAsync(message.BeaconId);
                 _dbContext.Pets.Remove(pet);
+                await _registryService.Remove(pet);
             }
         }
     }

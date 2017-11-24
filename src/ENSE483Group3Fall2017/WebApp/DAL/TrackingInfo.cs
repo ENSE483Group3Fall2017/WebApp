@@ -1,16 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.DAL
 {
     public class TrackingInfo
     {
+        [Key]
         public Guid ID { get; set; }
 
         public Guid BatchID { get; set; }
 
         public string BeaconID { get; set; }
 
-        public string GpsCoordinate { get; set; }
+        public string GpsCoordinates { get; set; }
 
         public string GeoReversedAddress { get; set; }
 
@@ -26,7 +28,7 @@ namespace WebApp.DAL
 
         public DateTime MaxProximityTime { get; set; }
 
-        public int MinProxmityInFrame { get; set; }
+        public int MinProximityInFrame { get; set; }
 
         public int MinProxmityTime { get; set; }
     }

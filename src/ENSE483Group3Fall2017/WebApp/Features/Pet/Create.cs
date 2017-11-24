@@ -18,13 +18,13 @@ namespace WebApp.Features.Pet
 
             [Required(AllowEmptyStrings = false)]
             [StringLength(maximumLength: 50)]
-            public string PetName { get; set; }
+            public string Name { get; set; }
 
             [Required]
-            public PetKind PetKind { get; set; }
+            public PetKind Kind { get; set; }
 
             [StringLength(maximumLength: 150)]
-            public string PetDesciption { get; set; }
+            public string Description { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -46,9 +46,9 @@ namespace WebApp.Features.Pet
                         var petExists = await _dbContext.Pets.AnyAsync(x => x.BeaconID == id);
                         if (petExists) context.AddFailure($"Beacon id {beaconID} is already in use.");
                     });
-                RuleFor(x => x.PetKind).NotEqual(default(PetKind));
-                RuleFor(x => x.PetName).NotEmpty().MaximumLength(50);
-                RuleFor(x => x.PetDesciption).MaximumLength(150);
+                RuleFor(x => x.Kind).NotEqual(default(PetKind));
+                RuleFor(x => x.Name).NotEmpty().MaximumLength(50);
+                RuleFor(x => x.Description).MaximumLength(150);
             }
         }
 

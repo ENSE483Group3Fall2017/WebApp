@@ -32,15 +32,15 @@ namespace WebApp.Features.Tracking
         {
             public Guid Id { get; set; }
 
-            public DateTime FrameStart { get; set; }
+            public DateTime FrameStartTime { get; set; }
 
-            public DateTime FrameEnd { get; set; }
+            public DateTime FrameEndTime { get; set; }
 
-            public int MaxProximity { get; set; }
+            public int MaxProximityInFrame { get; set; }
 
-            public int MinProximity { get; set; }
+            public int MinProximityInFrame { get; set; }
 
-            public string Location { get; set; }
+            public string GeoReversedAddress { get; set; }
         }
 
         public class QueryHandler : IAsyncRequestHandler<Query, IEnumerable<Model>>
