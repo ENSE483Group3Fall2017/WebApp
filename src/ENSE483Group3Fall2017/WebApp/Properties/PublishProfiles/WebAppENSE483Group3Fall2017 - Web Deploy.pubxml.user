@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAApdXbcu+WoE2uHfJHHcRnZQAAAAACAAAAAAAQZgAAAAEAACAAAACTIhVhTri9o81Uwbro1PpdZ4+z0PiHafc/DOC1S+WEDAAAAAAOgAAAAAIAACAAAAAQ1FqBIQn0v8oQSvhXP1PlEz5HGgjvDkP9+x0lnP2+V4AAAAB5C6tMDrIRwh0gsS2W2E3zQ7QFhj31g/hU6+14jS3iJ9gB5AH7NgCS9DxE/BYXrmxr7/j519Ll30fxj/E7Ma70t4e76k5ACQ8ZpaCP9ctVSzyfJ+dIjKdnV54V87Sy8KzYl3QnPHD1cF9GoaedA4YpVv+hJYJvLLR8P2jOWuPp/0AAAAClJm0RvuX0WVeJRlu52Z1a+Y82PLiiavoaqcu4VP5OF/9/aSD+QkLssC6rcI5t/tzN940P446xudUlmo8skj4t</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="PetTrackingDatabase">
+      <Value>Server=tcp:ense483group3fall2017.database.windows.net,1433;Initial Catalog=PetsTracking;Persist Security Info=False;User ID=ENSE483Group3Fall2017;Password=Qwerty123456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

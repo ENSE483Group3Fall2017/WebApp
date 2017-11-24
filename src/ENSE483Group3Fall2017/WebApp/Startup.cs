@@ -30,7 +30,11 @@ namespace WebApp
                 opt.Filters.Add(typeof(ValidatorActionFilter));
             })
             .AddFeatureFolders()
-            .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<Startup>(); });
+            .AddFluentValidation(cfg => 
+            {
+                cfg.RegisterValidatorsFromAssemblyContaining<Startup>();
+                cfg.ConfigureClientsideValidation(enabled: false);
+            });
 
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
