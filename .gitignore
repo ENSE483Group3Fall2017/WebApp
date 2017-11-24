@@ -3,8 +3,4 @@
 /src/ENSE483Group3Fall2017/WebApp/*.user
 /src/ENSE483Group3Fall2017/WebApp.Tests/bin
 /src/ENSE483Group3Fall2017/WebApp.Tests/obj
-/src/ENSE483Group3Fall2017/.vs
-/src/ENSE483Group3Fall2017/.vs/ENSE483Group3Fall2017/v15/.suo
-/src/ENSE483Group3Fall2017/.vs/ENSE483Group3Fall2017/v15/Server/sqlite3/db.lock
-/src/ENSE483Group3Fall2017/.vs/ENSE483Group3Fall2017/v15/Server/sqlite3/storage.ide
-/src/ENSE483Group3Fall2017/.vs/config/applicationhost.config
+/src/ENSE483Group3Fall2017/.vs/
