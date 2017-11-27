@@ -20,16 +20,12 @@ namespace WebApp.DAL
 
         public DateTime FrameEndTime { get; set; }
 
-        public int ProximityAtFrameStart { get; set; } 
-
-        public int ProximityAtFrameEnd { get; set; }
-
         public int MaxProximityInFrame { get; set; }
 
         public DateTime MaxProximityTime { get; set; }
 
         public int MinProximityInFrame { get; set; }
 
-        public int MinProxmityTime { get; set; }
+        public DateTime MinProximityTime { get; set; }
     }
 }

@@ -43,6 +43,8 @@ namespace WebApp.Features.Pet
 
             public async Task<Option<Model>> Handle(Query message)
             {
+                message = message ?? throw new ArgumentNullException(nameof(message));
+
                 var pet = await _dbContext.Pets.AsNoTracking().FirstOrDefaultAsync(x => x.BeaconID == message.Id);
                 if (pet == null) return Option.None<Model>();
 

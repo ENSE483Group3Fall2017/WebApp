@@ -56,6 +56,8 @@ namespace WebApp.Features.Tracking
 
             public async Task<IEnumerable<Model>> Handle(Query message)
             {
+                message = message ?? throw new ArgumentNullException(nameof(message));
+
                 var records = await _dbContext.TrackingInfos
                                                 .AsNoTracking()
                                                 .OrderByDescending(x => x.FrameStartTime)

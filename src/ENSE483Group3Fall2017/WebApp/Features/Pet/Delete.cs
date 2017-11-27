@@ -50,6 +50,8 @@ namespace WebApp.Features.Pet
 
             public async Task Handle(Command message)
             {
+                message = message ?? throw new ArgumentNullException(nameof(message));
+
                 var pet = await _dbContext.Pets.FindAsync(message.BeaconId);
                 _dbContext.Pets.Remove(pet);
                 await _registryService.Remove(pet);

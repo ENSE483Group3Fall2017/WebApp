@@ -52,6 +52,8 @@ namespace WebApp.Features.Tracking
 
             public async Task<Option<Model>> Handle(Query message)
             {
+                message = message ?? throw new ArgumentNullException(nameof(message));
+
                 var record = await _dbContext.TrackingInfos
                                                 .AsNoTracking()
                                                 .FirstOrDefaultAsync(x => x.ID == message.TrackingId);

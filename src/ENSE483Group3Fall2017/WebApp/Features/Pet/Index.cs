@@ -39,9 +39,10 @@ namespace WebApp.Features.Pet
 
             public async Task<IEnumerable<Model>> Handle(Query message)
             {
-                var pets = await _dbContext.Pets
-                                            .AsNoTracking()
-                                            .ToArrayAsync();
+                message = message ?? throw new ArgumentNullException(nameof(message));
+
+                var pets = await _dbContext.Pets.AsNoTracking()
+                                                .ToArrayAsync();
                 if (!pets.Any())
                     return Enumerable.Empty<Model>();
 

@@ -66,6 +66,7 @@ namespace WebApp.Features.Pet
             public Task Handle(Command message)
             {
                 message = message ?? throw new ArgumentNullException(nameof(message));
+
                 var pet = _mapper.Map<Command, DAL.Pet>(message);
                 return _dbContext.Pets.AddAsync(pet);
             }
