@@ -39,7 +39,7 @@
                     <textarea asp-for="Description" rows="2" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button asp-action="Create" type="submit" class="btn btn-primary">Submit</button>
                 <a asp-controller="Pet" asp-action="Index" class="btn btn-default">Cancel</a>
             </form>
         </div>

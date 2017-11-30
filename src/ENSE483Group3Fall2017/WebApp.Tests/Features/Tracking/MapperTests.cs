@@ -23,7 +23,8 @@ namespace WebApp.Tests.Features.Tracking.MapperTests
         {
             // Arrange
             var likeness = trackingInfo.AsSource()
-                                        .OfLikeness<Index.Model>();
+                                        .OfLikeness<Index.Model>()
+                                        .With(x => x.AverageProximity).EqualsWhen((s, d) => d.AverageProximity == (s.MaxProximityInFrame + s.MinProximityInFrame) / 2);
 
             // Act
             var result = sut.Map<DAL.TrackingInfo, Index.Model>(trackingInfo);
@@ -40,10 +41,10 @@ namespace WebApp.Tests.Features.Tracking.MapperTests
         {
             // Arrange
             var likeness = trackingInfo.AsSource()
-                                        .OfLikeness<Details.Model>();
+                                        .OfLikeness<Index.Model>();
 
             // Act
-            var result = sut.Map<DAL.TrackingInfo, Details.Model>(trackingInfo);
+            var result = sut.Map<DAL.TrackingInfo, Index.Model>(trackingInfo);
 
             // Assert
             likeness.ShouldEqual(result);

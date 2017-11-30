@@ -1,4 +1,4 @@
-﻿@using WebApp.Features.Pet
+﻿@using WebApp.Features.Tracking
 
 @model IEnumerable<Index.Model>
 
@@ -9,17 +9,17 @@
 }
 
 <div class="container">
-    <h2>@ViewData["Title"]</h2>
+    <h2>@ViewData["PetName"]'s Tarcking History</h2>
     <div class="row">
         <div class="col-md-10">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <td>#</td>
-                        <td>Beacon Id</td>
-                        <td>Name</td>
-                        <td>Kind</td>
-                        <td>Status</td>
+                        <td>Frame Start</td>
+                        <td>Frame End</td>
+                        <td>Average Proximity</td>
+                        <td>Location</td>
                         <td>Actions</td>
                     </tr>
                 </thead>
@@ -32,25 +32,25 @@
                                 @rowIndex
                             </td>
                             <td>
-                                <a asp-controller="Tracking" asp-action="Index" asp-route-id="@item.BeaconId">@item.BeaconId</a>
+                                @Html.DisplayFor(modelItem => item.FrameStartTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.FrameEndTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Kind)
+                                ~@Html.DisplayFor(modelItem => item.AverageProximity) (meters)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @Html.DisplayFor(modelItem => item.GeoReversedAddress)
                             </td>
-                            <td>                                
-                                <a asp-action="Details" asp-route-id="@item.BeaconId">Details</a>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <a asp-controller="Pet" asp-action="Create" class="btn btn-primary">Add Pet</a>
+            <a asp-controller="Pet" asp-action="Index" class="btn btn-default"><< Pets</a>
         </div>
     </div>
 </div>

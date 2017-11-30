@@ -6,8 +6,9 @@ namespace WebApp.Features.Tracking
     {
         public MappingProfile()
         {
-            CreateMap<DAL.TrackingInfo, Index.Model>();
-            CreateMap<DAL.TrackingInfo, Details.Model>();
+            CreateMap<DAL.TrackingInfo, Index.Model>()
+                .ForMember(dst => dst.AverageProximity, opt => opt.MapFrom(src => (src.MinProximityInFrame + src.MinProximityInFrame) / 2));
+            
         }
     }
 }

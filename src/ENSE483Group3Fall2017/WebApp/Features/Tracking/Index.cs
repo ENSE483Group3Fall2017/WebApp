@@ -2,8 +2,9 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Optional;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApp.DAL;
 
@@ -11,35 +12,36 @@ namespace WebApp.Features.Tracking
 {
     public class Index
     {
-        public class Query : IRequest<Option<Model>>
+        public class Query : IRequest<IEnumerable<Model>>
         {
-            public Guid TrackingId { get; set; }
+            public string Id { get; set; }
         }
 
         public class QueryValidator : AbstractValidator<Query>
         {
             public QueryValidator()
             {
-                RuleFor(x => x.TrackingId).NotEqual(default(Guid));
+                RuleFor(x => x.Id)
+                    .Cascade(CascadeMode.StopOnFirstFailure)
+                    .NotNull()
+                    .NotEmpty();
             }
         }
 
         public class Model
         {
+            public Guid Id { get; set; }
+
             public DateTime FrameStartTime { get; set; }
 
             public DateTime FrameEndTime { get; set; }
 
-            public int MaxProximityInFrame { get; set; }
-
-            public int MinProximityInFrame { get; set; }
+            public int AverageProximity { get; set; }
 
             public string GeoReversedAddress { get; set; }
-
-            public string GpsCoordinates { get; set; }
         }
 
-        public class QueryHandler : IAsyncRequestHandler<Query, Option<Model>>
+        public class QueryHandler : IAsyncRequestHandler<Query, IEnumerable<Model>>
         {
             private readonly IDbContext _dbContext;
             private readonly IMapper _mapper;
@@ -50,20 +52,19 @@ namespace WebApp.Features.Tracking
                 _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             }
 
-            public async Task<Option<Model>> Handle(Query message)
+            public async Task<IEnumerable<Model>> Handle(Query message)
             {
                 message = message ?? throw new ArgumentNullException(nameof(message));
 
-                var record = await _dbContext.TrackingInfos
+                var records = await _dbContext.TrackingInfos
                                                 .AsNoTracking()
-                                                .FirstOrDefaultAsync(x => x.ID == message.TrackingId);
+                                                .Where(x => x.BeaconID == message.Id)
+                                                .OrderByDescending(x => x.FrameStartTime)
+                                                .Take(50)
+                                                .ToArrayAsync();
 
-                if (record == null)
-                    return Option.None<Model>();
-
-                return _mapper.Map<DAL.TrackingInfo, Model>(record).Some();
+                return records.Select(x => _mapper.Map<DAL.TrackingInfo, Model>(x)).ToArray();
             }
         }
-
     }
 }
